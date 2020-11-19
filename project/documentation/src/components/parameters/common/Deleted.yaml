@@ -1,0 +1,7 @@
+name: "deleted"
+in: "query"
+description: "Get all, deleted, not deleted data. Default not deleted."
+required: false
+schema:
+  $ref: "#/components/schemas/Deleted"
+  default: ACTIVE

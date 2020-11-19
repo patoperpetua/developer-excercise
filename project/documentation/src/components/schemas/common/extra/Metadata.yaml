@@ -1,0 +1,32 @@
+type: "object"
+properties:
+  first:
+    type: "integer"
+    format: "int64"
+  prev:
+    type: "integer"
+    format: "int64"
+  self:
+    type: "integer"
+    format: "int64"
+  next:
+    type: "integer"
+    format: "int64"
+  last:
+    type: "integer"
+    format: "int64"
+  total:
+    type: "integer"
+    format: "int64"
+  pages:
+    type: "integer"
+    format: "int64"
+  links:
+    type: "object"
+    properties:
+      current: 
+        type: string
+      next:
+        type: string
+      previous:
+        type: string

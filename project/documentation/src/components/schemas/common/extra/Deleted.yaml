@@ -1,0 +1,6 @@
+type: string
+default: ACTIVE
+enum:
+  - ACTIVE
+  - DELETED
+  - ALL

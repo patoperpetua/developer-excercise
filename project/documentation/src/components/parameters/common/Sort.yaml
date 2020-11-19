@@ -1,0 +1,6 @@
+name: "sort"
+description: "sort by property."
+in: "query"
+required: false
+schema:
+  type: "string"

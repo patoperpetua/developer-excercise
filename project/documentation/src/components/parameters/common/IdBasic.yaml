@@ -1,0 +1,6 @@
+name: "id"
+description: "id to delete or search"
+in: "path"
+required: true
+schema:
+  $ref: "#/components/schemas/BasicId"

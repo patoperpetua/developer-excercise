@@ -1,0 +1,4 @@
+description: Object's created time.
+type: string
+format: date-time
+readOnly: true

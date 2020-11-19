@@ -1,0 +1,5 @@
+description: "Some parameters are missing or badly entered."
+content:
+  application/json:
+    schema:
+      $ref: "#/components/schemas/CustomError"
