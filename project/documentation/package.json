@@ -19,12 +19,12 @@
     "openapi-generator-cli": "npm run openapi-generator-cli",
     "generate": "npm run generate-lib",
     "generate-lib": "npm run generate-lib-angular && npm run generate-lib-android",
-    "generate-lib-android": "npm run generate-java && npm run install-java",
+    "generate-lib-android": "npm run generate-android && npm run install-android",
     "generate-android": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/java-android -g java --config conf/api-java-android-client.json",
-    "install-android": "cd ../libraries/android-java && mvnw clean install",
-    "generate-lib-angular": "npm run generate-typescript && npm run install-typescript",
-    "generate-angular": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/typescript-angular -g typescript-angular --config conf/api-typescript-angular.json",
-    "install-angular": "cd ../libs/typescript && npm i && npm run build && npm pack",
+    "install-android": "cd ../libraries/java-android && ./mvnw clean install",
+    "generate-lib-angular": "npm run generate-angular && npm run install-angular",
+    "generate-angular": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/typescript-angular -g typescript-angular --config conf/api-typescript-angular-client.json",
+    "install-angular": "cd ../libraries/typescript-angular && npm i && npm run build && npm pack",
     "generate-server-nodejs": "openapi-generator-cli generate -i dist/openapi.json -o ../server -g spring --config conf/api-nodejs-server.json"
   },
   "repository": {
@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/patoperpetua/developer-excercise/issues"
   },
-  "homepage": "https://github.com/patoperpetua/developer-excercise#readme",
+  "homepage": "https://github.com/patoperpetua/developer-excercise/project/documentation#readme",
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.1.4",
     "create-openapi-repo": "^3.1.2",
