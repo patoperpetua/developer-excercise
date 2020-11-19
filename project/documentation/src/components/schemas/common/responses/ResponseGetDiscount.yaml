@@ -1,0 +1,9 @@
+description: Get discount's response.
+type: object
+properties:
+  metadata:
+    $ref: '#/components/schemas/Metadata'
+  items:
+    type: array
+    items:
+      $ref: '#/components/schemas/Discounts'

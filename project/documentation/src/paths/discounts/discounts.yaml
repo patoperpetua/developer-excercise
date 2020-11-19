@@ -1,0 +1,75 @@
+get:
+  tags:
+    - Discounts
+  summary: Get all discounts.
+  description: Get all discounts.
+  operationId: getDiscounts
+  parameters:
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/Size'
+    - $ref: '#/components/parameters/Sort'
+    - $ref: '#/components/parameters/Deleted'
+    - $ref: '#/components/parameters/Metadata'
+  responses:
+    '200':
+      description: Request OK.
+      headers:
+        Limit:
+          $ref: "#/components/headers/Limit"
+        Remaining:
+          $ref: "#/components/headers/Remaining"
+        Reset:
+          $ref: "#/components/headers/Reset"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResponseGetDiscount"
+    '204':
+      $ref: '#/components/responses/204'
+    '400':
+      $ref: '#/components/responses/400'
+    '401':
+      $ref: '#/components/responses/401'
+    '404':
+      $ref: '#/components/responses/404'
+    '405':
+      $ref: '#/components/responses/405'
+  x-swagger-router-controller: Discounts
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'read:discount'
+post:
+  tags:
+    - "Discounts"
+  summary: "Add one discount."
+  description: "Add one discount."
+  operationId: "addDiscount"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Discounts"
+  responses:
+    '200':
+      description: "Request OK."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Discounts"
+    '400':
+      $ref: "#/components/responses/400"
+    '401':
+      $ref: "#/components/responses/401"
+    '404':
+      $ref: "#/components/responses/404"
+    '405':
+      $ref: "#/components/responses/405"
+  x-swagger-router-controller: "Discounts"
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'create:discount'
