@@ -1,0 +1,6 @@
+description: The price of product to discount. Default value is the CHEAPEST product of the selection.
+type: string
+default: CHEAPEST
+enum:
+  - CHEAPEST
+  - PRICEY

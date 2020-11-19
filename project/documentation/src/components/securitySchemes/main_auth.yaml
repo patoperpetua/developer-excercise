@@ -1,0 +1,19 @@
+type: oauth2
+flows:
+  implicit:
+    authorizationUrl: 'http://localhost:9090.com/auth'
+    scopes:
+      'read:product': read product.
+      'update:product': modify product.
+      'create:product': create product.
+      'delete:product': remove product.
+      'scan:product': scan product.
+      'bulk:product': bulk create product.
+      'read:discount': read discount.
+      'update:discount': modify discount.
+      'create:discount': create discount.
+      'delete:discount': remove discount.
+      'read:order': read discount.
+      'update:order': modify discount.
+      'create:order': create discount.
+      'delete:order': remove discount.

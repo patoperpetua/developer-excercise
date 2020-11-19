@@ -1,0 +1,33 @@
+description: Order's information.
+type: object
+required:
+  - id
+properties:
+  id:
+    $ref: "#/components/schemas/IdOrder"
+  name:
+    type: string
+  totalPrice:
+    $ref: "#/components/schemas/BasicPrice"
+  products:
+    type: array
+    items:
+      $ref: "#/components/schemas/Products"
+  idProducts: 
+    type: array
+    items:
+      $ref: "#/components/schemas/IdProduct"
+  discounts:
+    type: array
+    items:
+      $ref: "#/components/schemas/Discounts"
+  idDiscounts: 
+    type: array
+    items:
+      $ref: "#/components/schemas/IdDiscount"
+  deleted:
+    $ref: "#/components/schemas/DeletedBoolean"
+  createdAt:
+    $ref: "#/components/schemas/CreatedAt"
+  modifiedAt:
+    $ref: "#/components/schemas/ModifiedAt"

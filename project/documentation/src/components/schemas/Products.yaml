@@ -1,0 +1,25 @@
+description: Product's information.
+type: object
+required:
+  - id
+properties:
+  id:
+    $ref: "#/components/schemas/IdProduct"
+  name:
+    type: string
+  price:
+    $ref: "#/components/schemas/BasicPrice"
+  idDiscounts: 
+    type: array
+    items:
+      $ref: "#/components/schemas/IdDiscount"
+  discounts:
+    type: array
+    items:
+      $ref: "#/components/schemas/Discounts"
+  deleted:
+    $ref: "#/components/schemas/DeletedBoolean"
+  createdAt:
+    $ref: "#/components/schemas/CreatedAt"
+  modifiedAt:
+    $ref: "#/components/schemas/ModifiedAt"

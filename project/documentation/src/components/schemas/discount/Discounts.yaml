@@ -1,0 +1,43 @@
+description: Discount's information.
+type: object
+required:
+  - id
+properties:
+  id:
+    $ref: "#/components/schemas/IdDiscount"
+  name:
+    type: string
+  discountType:
+    $ref: "#/components/schemas/DiscountType"
+  itemsXQuantity:
+    description:  indicate the number of ‘X’ items that a customer will have to buy to get the discount.
+    type: integer
+    format: int64
+  itemsYQuantity:
+    description: indicate the number of ‘Y’ items which will receive a discount.
+    type: integer
+    format: int64
+  discount:
+    description: indicate the % of discount of 'Y' items. this number goes from 0 to 100.
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+  maxDiscountToApply:
+    description: indicate the amount of discounts that can be applied in a single order.
+    type: integer
+    format: int64
+  products:
+    type: array
+    items:
+      $ref: "#/components/schemas/Products"
+  idProducts: 
+    type: array
+    items:
+      $ref: "#/components/schemas/IdProduct"
+  deleted:
+    $ref: "#/components/schemas/DeletedBoolean"
+  createdAt:
+    $ref: "#/components/schemas/CreatedAt"
+  modifiedAt:
+    $ref: "#/components/schemas/ModifiedAt"
