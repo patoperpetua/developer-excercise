@@ -1,0 +1,13 @@
+{
+    "allowUnicodeIdentifiers":true,
+    "ensureUniqueParams": true,
+    "enumPropertyNaming": "original",
+    "npmName": "@singletonsd/kinesis/apis-code-exercise-libs-angular",
+    "npmRepository": "https://www.npmjs.com/package/@singletonsd/kinesis/apis-code-exercise-libs-angular",
+    "npmVersion": "1.0.0",
+    "providedInRoot": true,
+    "snapshot": false,
+    "supportingFiles": false,
+    "supportsES6": true,
+    "withInterfaces": true
+}

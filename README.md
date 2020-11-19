@@ -68,3 +68,8 @@ You are free to make your solution to this exercise as simple or as complicated 
 - REST/HTTP API
 - User interface (web app)
 - Application CLI
+
+## Links
+
+- [Magento Configuration for Buy X pay Y](https://www.mageplaza.com/kb/how-setup-buy-x-get-y-free-in-magento-2.html)
+- [How to use "Buy X Get Y - Percent Discount: Buy X get Y Free" action](https://amasty.com/knowledge-base/special-promotions-buy-x-get-n-percent.html)

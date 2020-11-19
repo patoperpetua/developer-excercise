@@ -1,0 +1,13 @@
+{
+    "snapshot": true,
+    "modelPropertyNaming": "original",
+    "supportingFiles": "false",
+    "serializableModel": "true",
+    "groupId": "au.com.singletonsd.kinesis",
+    "artifactId": "api.code-exercise-lib",
+    "basePackage": "au.com.singletonsd.kinesis.api.serial",
+    "configPackage": "au.com.singletonsd.kinesis.api.serial.configuration",
+    "invokerPackage": "au.com.singletonsd.kinesis.api.serial.api",
+    "apiPackage": "au.com.singletonsd.kinesis.api.serial.api",
+    "modelPackage": "au.com.singletonsd.kinesis.api.serial.model"
+}

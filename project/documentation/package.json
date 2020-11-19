@@ -1,0 +1,55 @@
+{
+  "name": "code-exercise-documentation",
+  "version": "1.0.0",
+  "description": "Documentation using OPEN-API specification for a code exercise of Kinesis.",
+  "main": "index.js",
+  "scripts": {
+    "check": "npm-check",
+    "start": "swagger-repo serve -b src",
+    "clear-watcher": "echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p",
+    "web-server": "npm run build && static dist",
+    "build": "swagger-repo build -b src -o dist",
+    "build-all": "npm run build",
+    "test": "swagger-repo validate -b src",
+    "test-web": "npm run build-all && npm run web-server",
+    "gh-pages": "rm -rf web_deploy && mkdir -p web_deploy && cp -r dist/* web_deploy && swagger-repo gh-pages -b src",
+    "swagger-repo": "swagger-repo",
+    "create-openapi-repo": "create-openapi-repo",
+    "generate-from-scratch": "npm run test && npm run build-all && npm run typescript",
+    "openapi-generator-cli": "npm run openapi-generator-cli",
+    "generate": "npm run generate-lib",
+    "generate-lib": "npm run generate-lib-angular && npm run generate-lib-android",
+    "generate-lib-android": "npm run generate-java && npm run install-java",
+    "generate-android": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/java-android -g java --config conf/api-java-android-client.json",
+    "install-android": "cd ../libraries/android-java && mvnw clean install",
+    "generate-lib-angular": "npm run generate-typescript && npm run install-typescript",
+    "generate-angular": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/typescript-angular -g typescript-angular --config conf/api-typescript-angular.json",
+    "install-angular": "cd ../libs/typescript && npm i && npm run build && npm pack",
+    "generate-server-nodejs": "openapi-generator-cli generate -i dist/openapi.json -o ../server -g spring --config conf/api-nodejs-server.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/patoperpetua/developer-excercise.git"
+  },
+  "keywords": [
+    "kinesis",
+    "code-exercise",
+    "javascript",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "Patricio Perpetua",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patoperpetua/developer-excercise/issues"
+  },
+  "homepage": "https://github.com/patoperpetua/developer-excercise#readme",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.1.4",
+    "create-openapi-repo": "^3.1.2",
+    "node-static": "^0.7.11",
+    "npm-check": "^5.9.2",
+    "redoc": "^2.0.0-rc.45",
+    "swagger-repo": "^2.0.0-rc.15"
+  }
+}
