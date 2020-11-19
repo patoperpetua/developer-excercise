@@ -1,0 +1,2120 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: patoperpetua@singletonsd.com.au
+    url: http://kinesis.singletonsd.com.au/contact
+  description: |
+    This is an API to interact with Kineses Code Exercise API
+    # Introduction
+    This API allow to create, modify and delete products, discounts, and orders.
+    # User Authentication
+    This API does not contain any kind of user validation but It request to have a valid authentication user to interact with it. For more information about user Authentication, please refer to [Kinesis Authentication API](https://auth.kinesis.singleton.com.au/).
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://kinesis.singletonsd.com.au/terms/
+  title: Kinesis Code Exercise API
+  version: 1.0.0
+externalDocs:
+  description: Find out how to interact with Kinesis APIs.
+  url: https://kinesis.singletonsd.com.au/
+servers:
+- url: http://localhost:8000
+- url: http://kinesis.singletonsd.com.au
+tags:
+- description: Operations about discounts.
+  name: Discounts
+- description: Operations about products.
+  name: Products
+- description: Operations about orders.
+  name: Orders
+paths:
+  /discounts:
+    get:
+      description: Get all discounts.
+      operationId: getDiscounts
+      parameters:
+      - description: number of page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: size of page
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - description: sort by property.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      - description: If metadata is needed (for pagination controls)
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetDiscount'
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Response is empty.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:discount
+      summary: Get all discounts.
+      tags:
+      - Discounts
+      x-swagger-router-controller: Discounts
+      x-accepts: application/json
+    post:
+      description: Add one discount.
+      operationId: addDiscount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discounts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - create:discount
+      summary: Add one discount.
+      tags:
+      - Discounts
+      x-swagger-router-controller: Discounts
+      x-contentType: application/json
+      x-accepts: application/json
+  /discounts/{id}:
+    delete:
+      description: Delete one discount.
+      operationId: deleteDiscount
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdDiscount'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdDiscount'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - delete:discount
+      summary: Delete one discount.
+      tags:
+      - Discounts
+      x-swagger-router-controller: Discounts
+      x-accepts: application/json
+    get:
+      description: Get one discount.
+      operationId: getDiscountById
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdDiscount'
+        style: simple
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:discount
+      summary: Get one discount.
+      tags:
+      - Discounts
+      x-swagger-router-controller: Discounts
+      x-accepts: application/json
+    put:
+      description: Edit one discount.
+      operationId: editDiscount
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdDiscount'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discounts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - update:discount
+      summary: Edit one discount.
+      tags:
+      - Discounts
+      x-swagger-router-controller: Discounts
+      x-contentType: application/json
+      x-accepts: application/json
+  /orders:
+    get:
+      description: Get all orders.
+      operationId: getOrders
+      parameters:
+      - description: number of page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: size of page
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - description: sort by property.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      - description: If metadata is needed (for pagination controls)
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetOrder'
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Response is empty.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:order
+      summary: Get all orders.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-accepts: application/json
+    post:
+      description: Add one order.
+      operationId: addOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Orders'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - create:order
+      summary: Add one order.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-contentType: application/json
+      x-accepts: application/json
+  /orders/{id}:
+    delete:
+      description: Delete one order.
+      operationId: deleteOrder
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrder'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdOrder'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - delete:order
+      summary: Delete one order.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-accepts: application/json
+    get:
+      description: Get one order.
+      operationId: getOrderById
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrder'
+        style: simple
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:order
+      summary: Get one order.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-accepts: application/json
+    put:
+      description: Edit one order.
+      operationId: editOrder
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrder'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Orders'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - update:order
+      summary: Edit one order.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-contentType: application/json
+      x-accepts: application/json
+  /orders/{id}/scan:
+    post:
+      description: Add product to order.
+      operationId: addProductOrder
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrder'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - update:order
+      summary: Add one product to order.
+      tags:
+      - Orders
+      x-swagger-router-controller: Orders
+      x-contentType: application/json
+      x-accepts: application/json
+  /products:
+    get:
+      description: Get all products.
+      operationId: getProducts
+      parameters:
+      - description: number of page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: size of page
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - description: sort by property.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      - description: If metadata is needed (for pagination controls)
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetProduct'
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Response is empty.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:product
+      summary: Get all products.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-accepts: application/json
+    post:
+      description: Add one product.
+      operationId: addProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - create:product
+      summary: Add one product.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-contentType: application/json
+      x-accepts: application/json
+  /products/{id}:
+    delete:
+      description: Delete one product.
+      operationId: deleteProduct
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdProduct'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdProduct'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - delete:product
+      summary: Delete one product.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-accepts: application/json
+    get:
+      description: Get one product.
+      operationId: getProductById
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdProduct'
+        style: simple
+      - description: Get all, deleted, not deleted data. Default not deleted.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          $ref: '#/components/schemas/Deleted'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - read:product
+      summary: Get one product.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-accepts: application/json
+    put:
+      description: Edit one product.
+      operationId: editProduct
+      parameters:
+      - description: id to delete or search
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdProduct'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - update:product
+      summary: Edit one product.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-contentType: application/json
+      x-accepts: application/json
+  /products/bulk:
+    post:
+      description: Add a list of products.
+      operationId: addProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestBulkProduct'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Products'
+                type: array
+          description: Request OK.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Some parameters are missing or badly entered.
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Entity not found.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomError'
+          description: Illegal input for operation.
+      security:
+      - api_key: []
+      - bearer_auth: []
+      - main_auth:
+        - bulk:product
+      summary: Add a list of products.
+      tags:
+      - Products
+      x-swagger-router-controller: Products
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  headers:
+    Limit:
+      description: The number of allowed requests in the current period
+      explode: false
+      schema:
+        format: int64
+        type: integer
+      style: simple
+    Remaining:
+      description: The number of remaining requests in the current period
+      explode: false
+      schema:
+        format: int64
+        type: integer
+      style: simple
+    Reset:
+      description: The number of seconds left in the current period
+      explode: false
+      schema:
+        format: int64
+        type: integer
+      style: simple
+  parameters:
+    Deleted:
+      description: Get all, deleted, not deleted data. Default not deleted.
+      explode: true
+      in: query
+      name: deleted
+      required: false
+      schema:
+        $ref: '#/components/schemas/Deleted'
+      style: form
+    IdBasic:
+      description: id to delete or search
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicId'
+      style: simple
+    Metadata:
+      description: If metadata is needed (for pagination controls)
+      explode: true
+      in: query
+      name: metadata
+      required: false
+      schema:
+        default: false
+        type: boolean
+      style: form
+    Page:
+      description: number of page
+      explode: true
+      in: query
+      name: page
+      required: false
+      schema:
+        default: 0
+        format: int32
+        type: integer
+      style: form
+    Size:
+      description: size of page
+      explode: true
+      in: query
+      name: size
+      required: false
+      schema:
+        default: 10
+        format: int32
+        type: integer
+      style: form
+    Sort:
+      description: sort by property.
+      explode: true
+      in: query
+      name: sort
+      required: false
+      schema:
+        type: string
+      style: form
+    IdDiscount:
+      description: id to delete or search
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdDiscount'
+      style: simple
+    IdOrder:
+      description: id to delete or search
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdOrder'
+      style: simple
+    IdProduct:
+      description: id to delete or search
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdProduct'
+      style: simple
+  responses:
+    "204":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+      description: Response is empty.
+    "400":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+      description: Some parameters are missing or badly entered.
+    "401":
+      content:
+        application/json:
+          schema:
+            type: string
+      description: Unauthorized
+    "404":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+      description: Entity not found.
+    "405":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+      description: Illegal input for operation.
+  schemas:
+    BasicId:
+      description: Object's Id.
+      format: int64
+      type: integer
+    BasicPrice:
+      description: Object's price.
+      format: float
+      type: number
+    CustomError:
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: string
+      required:
+      - message
+      type: object
+    CreatedAt:
+      description: Object's created time.
+      format: date-time
+      readOnly: true
+      type: string
+    Deleted:
+      default: ACTIVE
+      enum:
+      - ACTIVE
+      - DELETED
+      - ALL
+      type: string
+    DeletedBoolean:
+      default: false
+      type: boolean
+    Metadata:
+      example:
+        next: 5
+        total: 2
+        pages: 7
+        last: 5
+        prev: 6
+        self: 1
+        links:
+          next: next
+          current: current
+          previous: previous
+        first: 0
+      properties:
+        first:
+          format: int64
+          type: integer
+        prev:
+          format: int64
+          type: integer
+        self:
+          format: int64
+          type: integer
+        next:
+          format: int64
+          type: integer
+        last:
+          format: int64
+          type: integer
+        total:
+          format: int64
+          type: integer
+        pages:
+          format: int64
+          type: integer
+        links:
+          $ref: '#/components/schemas/Metadata_links'
+      type: object
+    ModifiedAt:
+      description: Object's modified time.
+      format: date-time
+      readOnly: true
+      type: string
+    IdDiscount:
+      description: Discount's Id.
+      format: int64
+      type: integer
+    IdOrder:
+      description: Order's Id.
+      format: int64
+      type: integer
+    IdProduct:
+      description: Product's Id.
+      format: int64
+      type: integer
+    requestBulkProduct:
+      description: Bulk pruducts request.
+      properties:
+        products:
+          items:
+            $ref: '#/components/schemas/Products'
+          type: array
+      type: object
+    ResponseGetDiscount:
+      description: Get discount's response.
+      example:
+        metadata:
+          next: 5
+          total: 2
+          pages: 7
+          last: 5
+          prev: 6
+          self: 1
+          links:
+            next: next
+            current: current
+            previous: previous
+          first: 0
+        items:
+        - itemsXQuantity: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          deleted: false
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          discount: 41.45608
+          id: 9
+          itemsYQuantity: 2
+          maxDiscountToApply: 7
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+        - itemsXQuantity: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          deleted: false
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          discount: 41.45608
+          id: 9
+          itemsYQuantity: 2
+          maxDiscountToApply: 7
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          items:
+            $ref: '#/components/schemas/Discounts'
+          type: array
+      type: object
+    ResponseGetOrder:
+      description: Get orders response.
+      example:
+        metadata:
+          next: 5
+          total: 2
+          pages: 7
+          last: 5
+          prev: 6
+          self: 1
+          links:
+            next: next
+            current: current
+            previous: previous
+          first: 0
+        items:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - itemsXQuantity: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            deleted: false
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            discount: 41.45608
+            id: 9
+            itemsYQuantity: 2
+            maxDiscountToApply: 7
+            products:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            idProducts:
+            - null
+            - null
+          - itemsXQuantity: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            deleted: false
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            discount: 41.45608
+            id: 9
+            itemsYQuantity: 2
+            maxDiscountToApply: 7
+            products:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            idProducts:
+            - null
+            - null
+          totalPrice: 6.0274563
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - itemsXQuantity: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            deleted: false
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            discount: 41.45608
+            id: 9
+            itemsYQuantity: 2
+            maxDiscountToApply: 7
+            products:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            idProducts:
+            - null
+            - null
+          - itemsXQuantity: 3
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            deleted: false
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            discount: 41.45608
+            id: 9
+            itemsYQuantity: 2
+            maxDiscountToApply: 7
+            products:
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              idDiscounts:
+              - null
+              - null
+              deleted: false
+              discounts:
+              - null
+              - null
+              price: 1.0246457
+              modifiedAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              id: 1
+            idProducts:
+            - null
+            - null
+          totalPrice: 6.0274563
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 0
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          items:
+            $ref: '#/components/schemas/Orders'
+          type: array
+      type: object
+    ResponseGetProduct:
+      description: Get pruducts response.
+      example:
+        metadata:
+          next: 5
+          total: 2
+          pages: 7
+          last: 5
+          prev: 6
+          self: 1
+          links:
+            next: next
+            current: current
+            previous: previous
+          first: 0
+        items:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          items:
+            $ref: '#/components/schemas/Products'
+          type: array
+      type: object
+    Discounts:
+      description: Discount's information.
+      example:
+        itemsXQuantity: 3
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deleted: false
+        modifiedAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        discount: 41.45608
+        id: 9
+        itemsYQuantity: 2
+        maxDiscountToApply: 7
+        products:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+        idProducts:
+        - null
+        - null
+      properties:
+        id:
+          description: Discount's Id.
+          format: int64
+          type: integer
+        name:
+          type: string
+        discountType:
+          $ref: '#/components/schemas/DiscountType'
+        itemsXQuantity:
+          description: indicate the number of ‘X’ items that a customer will have
+            to buy to get the discount.
+          format: int64
+          type: integer
+        itemsYQuantity:
+          description: indicate the number of ‘Y’ items which will receive a discount.
+          format: int64
+          type: integer
+        discount:
+          description: indicate the % of discount of 'Y' items. this number goes from
+            0 to 100.
+          format: float
+          maximum: 100
+          minimum: 0
+          type: number
+        maxDiscountToApply:
+          description: indicate the amount of discounts that can be applied in a single
+            order.
+          format: int64
+          type: integer
+        products:
+          items:
+            $ref: '#/components/schemas/Products'
+          type: array
+        idProducts:
+          items:
+            $ref: '#/components/schemas/IdProduct'
+          type: array
+        deleted:
+          default: false
+          type: boolean
+        createdAt:
+          description: Object's created time.
+          format: date-time
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Object's modified time.
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - id
+      type: object
+    DiscountType:
+      default: CHEAPEST
+      description: The price of product to discount. Default value is the CHEAPEST
+        product of the selection.
+      enum:
+      - CHEAPEST
+      - PRICEY
+      type: string
+    Orders:
+      description: Order's information.
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        idDiscounts:
+        - null
+        - null
+        deleted: false
+        discounts:
+        - itemsXQuantity: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          deleted: false
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          discount: 41.45608
+          id: 9
+          itemsYQuantity: 2
+          maxDiscountToApply: 7
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+        - itemsXQuantity: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          deleted: false
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          discount: 41.45608
+          id: 9
+          itemsYQuantity: 2
+          maxDiscountToApply: 7
+          products:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            idDiscounts:
+            - null
+            - null
+            deleted: false
+            discounts:
+            - null
+            - null
+            price: 1.0246457
+            modifiedAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            id: 1
+          idProducts:
+          - null
+          - null
+        totalPrice: 6.0274563
+        modifiedAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 0
+        products:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          idDiscounts:
+          - null
+          - null
+          deleted: false
+          discounts:
+          - null
+          - null
+          price: 1.0246457
+          modifiedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: 1
+        idProducts:
+        - null
+        - null
+      properties:
+        id:
+          description: Order's Id.
+          format: int64
+          type: integer
+        name:
+          type: string
+        totalPrice:
+          description: Object's price.
+          format: float
+          type: number
+        products:
+          items:
+            $ref: '#/components/schemas/Products'
+          type: array
+        idProducts:
+          items:
+            $ref: '#/components/schemas/IdProduct'
+          type: array
+        discounts:
+          items:
+            $ref: '#/components/schemas/Discounts'
+          type: array
+        idDiscounts:
+          items:
+            $ref: '#/components/schemas/IdDiscount'
+          type: array
+        deleted:
+          default: false
+          type: boolean
+        createdAt:
+          description: Object's created time.
+          format: date-time
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Object's modified time.
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - id
+      type: object
+    Products:
+      description: Product's information.
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        idDiscounts:
+        - null
+        - null
+        deleted: false
+        discounts:
+        - null
+        - null
+        price: 1.0246457
+        modifiedAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 1
+      properties:
+        id:
+          description: Product's Id.
+          format: int64
+          type: integer
+        name:
+          type: string
+        price:
+          description: Object's price.
+          format: float
+          type: number
+        idDiscounts:
+          items:
+            $ref: '#/components/schemas/IdDiscount'
+          type: array
+        discounts:
+          items:
+            $ref: '#/components/schemas/Discounts'
+          type: array
+        deleted:
+          default: false
+          type: boolean
+        createdAt:
+          description: Object's created time.
+          format: date-time
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Object's modified time.
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - id
+      type: object
+    Metadata_links:
+      example:
+        next: next
+        current: current
+        previous: previous
+      properties:
+        current:
+          type: string
+        next:
+          type: string
+        previous:
+          type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    bearer_auth:
+      scheme: bearer
+      type: http
+    main_auth:
+      flows:
+        implicit:
+          authorizationUrl: http://localhost:9090.com/auth
+          scopes:
+            read:product: read product.
+            update:product: modify product.
+            create:product: create product.
+            delete:product: remove product.
+            scan:product: scan product.
+            bulk:product: bulk create product.
+            read:discount: read discount.
+            update:discount: modify discount.
+            create:discount: create discount.
+            delete:discount: remove discount.
+            read:order: read discount.
+            update:order: modify discount.
+            create:order: create discount.
+            delete:order: remove discount.
+      type: oauth2
+
