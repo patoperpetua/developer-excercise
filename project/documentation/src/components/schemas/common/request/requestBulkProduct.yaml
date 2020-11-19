@@ -1,0 +1,7 @@
+description: Bulk pruducts request.
+type: object
+properties:
+  products:
+    type: array
+    items:
+      $ref: "#/components/schemas/Products"

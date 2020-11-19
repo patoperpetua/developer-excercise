@@ -1,0 +1,35 @@
+post:
+  tags:
+    - "Products"
+  summary: "Add a list of products."
+  description: "Add a list of products."
+  operationId: "addProducts"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/requestBulkProduct"
+  responses:
+    '200':
+      description: "Request OK."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Products"
+    '400':
+      $ref: "#/components/responses/400"
+    '401':
+      $ref: "#/components/responses/401"
+    '404':
+      $ref: "#/components/responses/404"
+    '405':
+      $ref: "#/components/responses/405"
+  x-swagger-router-controller: "Products"
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'bulk:product'

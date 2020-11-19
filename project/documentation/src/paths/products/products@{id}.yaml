@@ -1,0 +1,94 @@
+get:
+  tags:
+    - "Products"
+  summary: "Get one product."
+  description: "Get one product."
+  operationId: "getProductById"
+  parameters:
+    - $ref: "#/components/parameters/IdProduct"
+    - $ref: "#/components/parameters/Deleted"
+  responses:
+    '200':
+      description: "Request OK."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Products"
+    '400':
+      $ref: "#/components/responses/400"
+    '401':
+      $ref: "#/components/responses/401"
+    '404':
+      $ref: "#/components/responses/404"
+    '405':
+      $ref: "#/components/responses/405"
+  x-swagger-router-controller: Products
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'read:product'
+put:
+  tags:
+    - "Products"
+  summary: "Edit one product."
+  description: "Edit one product."
+  operationId: "editProduct"
+  parameters:
+    - $ref: "#/components/parameters/IdProduct"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Products"
+  responses:
+    '200':
+      description: "Request OK."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Products"
+    '400':
+      $ref: "#/components/responses/400"
+    '401':
+      $ref: "#/components/responses/401"
+    '404':
+      $ref: "#/components/responses/404"
+    '405':
+      $ref: "#/components/responses/405"
+  x-swagger-router-controller: "Products"
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'update:product'
+delete:
+  tags:
+    - "Products"
+  summary: "Delete one product."
+  description: "Delete one product."
+  operationId: "deleteProduct"
+  parameters:
+    - $ref: "#/components/parameters/IdProduct"
+  responses:
+    '200':
+      description: "Request OK."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IdProduct"
+    '400':
+      $ref: "#/components/responses/400"
+    '401':
+      $ref: "#/components/responses/401"
+    '404':
+      $ref: "#/components/responses/404"
+    '405':
+      $ref: "#/components/responses/405"
+  x-swagger-router-controller: Products
+  security:
+    - api_key: []
+    - bearer_auth: []
+    - main_auth:
+      - 'delete:product'
