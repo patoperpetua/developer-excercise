@@ -1,0 +1,996 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Kinesis Code Exercise API
+  termsOfService: 'https://kinesis.singletonsd.com.au/terms/'
+  contact:
+    email: patoperpetua@singletonsd.com.au
+    url: 'http://kinesis.singletonsd.com.au/contact'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  description: |
+    This is an API to interact with Kineses Code Exercise API
+    # Introduction
+    This API allow to create, modify and delete products, discounts, and orders.
+    # User Authentication
+    This API does not contain any kind of user validation but It request to have a valid authentication user to interact with it. For more information about user Authentication, please refer to [Kinesis Authentication API](https://auth.kinesis.singleton.com.au/).
+externalDocs:
+  description: Find out how to interact with Kinesis APIs.
+  url: 'https://kinesis.singletonsd.com.au/'
+tags:
+  - name: Discounts
+    description: Operations about discounts.
+  - name: Products
+    description: Operations about products.
+  - name: Orders
+    description: Operations about orders.
+servers:
+  - url: 'http://localhost:8000'
+  - url: 'http://kinesis.singletonsd.com.au'
+paths:
+  /discounts:
+    get:
+      tags:
+        - Discounts
+      summary: Get all discounts.
+      description: Get all discounts.
+      operationId: getDiscounts
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
+        - $ref: '#/components/parameters/Metadata'
+      responses:
+        '200':
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetDiscount'
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Discounts
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:discount'
+    post:
+      tags:
+        - Discounts
+      summary: Add one discount.
+      description: Add one discount.
+      operationId: addDiscount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discounts'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Discounts
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'create:discount'
+  '/discounts/{id}':
+    get:
+      tags:
+        - Discounts
+      summary: Get one discount.
+      description: Get one discount.
+      operationId: getDiscountById
+      parameters:
+        - $ref: '#/components/parameters/IdDiscount'
+        - $ref: '#/components/parameters/Deleted'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Discounts
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:discount'
+    put:
+      tags:
+        - Discounts
+      summary: Edit one discount.
+      description: Edit one discount.
+      operationId: editDiscount
+      parameters:
+        - $ref: '#/components/parameters/IdDiscount'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discounts'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Discounts
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'update:discount'
+    delete:
+      tags:
+        - Discounts
+      summary: Delete one discount.
+      description: Delete one discount.
+      operationId: deleteDiscount
+      parameters:
+        - $ref: '#/components/parameters/IdDiscount'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdDiscount'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Discounts
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'delete:discount'
+  /orders:
+    get:
+      tags:
+        - Orders
+      summary: Get all orders.
+      description: Get all orders.
+      operationId: getOrders
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
+        - $ref: '#/components/parameters/Metadata'
+      responses:
+        '200':
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetOrder'
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:order'
+    post:
+      tags:
+        - Orders
+      summary: Add one order.
+      description: Add one order.
+      operationId: addOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Orders'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'create:order'
+  '/orders/{id}':
+    get:
+      tags:
+        - Orders
+      summary: Get one order.
+      description: Get one order.
+      operationId: getOrderById
+      parameters:
+        - $ref: '#/components/parameters/IdOrder'
+        - $ref: '#/components/parameters/Deleted'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:order'
+    put:
+      tags:
+        - Orders
+      summary: Edit one order.
+      description: Edit one order.
+      operationId: editOrder
+      parameters:
+        - $ref: '#/components/parameters/IdOrder'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Orders'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'update:order'
+    delete:
+      tags:
+        - Orders
+      summary: Delete one order.
+      description: Delete one order.
+      operationId: deleteOrder
+      parameters:
+        - $ref: '#/components/parameters/IdOrder'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdOrder'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'delete:order'
+  '/orders/{id}/scan':
+    post:
+      tags:
+        - Orders
+      summary: Add one product to order.
+      description: Add product to order.
+      operationId: addProductOrder
+      parameters:
+        - $ref: '#/components/parameters/IdOrder'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orders'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Orders
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'update:order'
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get all products.
+      description: Get all products.
+      operationId: getProducts
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
+        - $ref: '#/components/parameters/Metadata'
+      responses:
+        '200':
+          description: Request OK.
+          headers:
+            Limit:
+              $ref: '#/components/headers/Limit'
+            Remaining:
+              $ref: '#/components/headers/Remaining'
+            Reset:
+              $ref: '#/components/headers/Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGetProduct'
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:product'
+    post:
+      tags:
+        - Products
+      summary: Add one product.
+      description: Add one product.
+      operationId: addProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'create:product'
+  '/products/{id}':
+    get:
+      tags:
+        - Products
+      summary: Get one product.
+      description: Get one product.
+      operationId: getProductById
+      parameters:
+        - $ref: '#/components/parameters/IdProduct'
+        - $ref: '#/components/parameters/Deleted'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'read:product'
+    put:
+      tags:
+        - Products
+      summary: Edit one product.
+      description: Edit one product.
+      operationId: editProduct
+      parameters:
+        - $ref: '#/components/parameters/IdProduct'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Products'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'update:product'
+    delete:
+      tags:
+        - Products
+      summary: Delete one product.
+      description: Delete one product.
+      operationId: deleteProduct
+      parameters:
+        - $ref: '#/components/parameters/IdProduct'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdProduct'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'delete:product'
+  /products/bulk:
+    post:
+      tags:
+        - Products
+      summary: Add a list of products.
+      description: Add a list of products.
+      operationId: addProducts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestBulkProduct'
+      responses:
+        '200':
+          description: Request OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Products'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+      x-swagger-router-controller: Products
+      security:
+        - api_key: []
+        - bearer_auth: []
+        - main_auth:
+            - 'bulk:product'
+components:
+  schemas:
+    BasicId:
+      description: Object's Id.
+      type: integer
+      format: int64
+    BasicPrice:
+      description: Object's price.
+      type: number
+      format: float
+    CustomError:
+      type: object
+      required:
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        data:
+          type: string
+    CreatedAt:
+      description: Object's created time.
+      type: string
+      format: date-time
+      readOnly: true
+    Deleted:
+      type: string
+      default: ACTIVE
+      enum:
+        - ACTIVE
+        - DELETED
+        - ALL
+    DeletedBoolean:
+      type: boolean
+      default: false
+    Metadata:
+      type: object
+      properties:
+        first:
+          type: integer
+          format: int64
+        prev:
+          type: integer
+          format: int64
+        self:
+          type: integer
+          format: int64
+        next:
+          type: integer
+          format: int64
+        last:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+        pages:
+          type: integer
+          format: int64
+        links:
+          type: object
+          properties:
+            current:
+              type: string
+            next:
+              type: string
+            previous:
+              type: string
+    ModifiedAt:
+      description: Object's modified time.
+      type: string
+      format: date-time
+      readOnly: true
+    IdDiscount:
+      description: Discount's Id.
+      type: integer
+      format: int64
+    IdOrder:
+      description: Order's Id.
+      type: integer
+      format: int64
+    IdProduct:
+      description: Product's Id.
+      type: integer
+      format: int64
+    requestBulkProduct:
+      description: Bulk pruducts request.
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+    ResponseGetDiscount:
+      description: Get discount's response.
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discounts'
+    ResponseGetOrder:
+      description: Get orders response.
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Orders'
+    ResponseGetProduct:
+      description: Get pruducts response.
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+    Discounts:
+      description: Discount's information.
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/IdDiscount'
+        name:
+          type: string
+        discountType:
+          $ref: '#/components/schemas/DiscountType'
+        itemsXQuantity:
+          description: indicate the number of ‘X’ items that a customer will have to buy to get the discount.
+          type: integer
+          format: int64
+        itemsYQuantity:
+          description: indicate the number of ‘Y’ items which will receive a discount.
+          type: integer
+          format: int64
+        discount:
+          description: indicate the % of discount of 'Y' items. this number goes from 0 to 100.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        maxDiscountToApply:
+          description: indicate the amount of discounts that can be applied in a single order.
+          type: integer
+          format: int64
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+        idProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdProduct'
+        deleted:
+          $ref: '#/components/schemas/DeletedBoolean'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        modifiedAt:
+          $ref: '#/components/schemas/ModifiedAt'
+    DiscountType:
+      description: The price of product to discount. Default value is the CHEAPEST product of the selection.
+      type: string
+      default: CHEAPEST
+      enum:
+        - CHEAPEST
+        - PRICEY
+    Orders:
+      description: Order's information.
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/IdOrder'
+        name:
+          type: string
+        totalPrice:
+          $ref: '#/components/schemas/BasicPrice'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Products'
+        idProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdProduct'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discounts'
+        idDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdDiscount'
+        deleted:
+          $ref: '#/components/schemas/DeletedBoolean'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        modifiedAt:
+          $ref: '#/components/schemas/ModifiedAt'
+    Products:
+      description: Product's information.
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/IdProduct'
+        name:
+          type: string
+        price:
+          $ref: '#/components/schemas/BasicPrice'
+        idDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdDiscount'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discounts'
+        deleted:
+          $ref: '#/components/schemas/DeletedBoolean'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        modifiedAt:
+          $ref: '#/components/schemas/ModifiedAt'
+  responses:
+    '204':
+      description: Response is empty.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+    '400':
+      description: Some parameters are missing or badly entered.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: string
+    '404':
+      description: Entity not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+    '405':
+      description: Illegal input for operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomError'
+  parameters:
+    Deleted:
+      name: deleted
+      in: query
+      description: 'Get all, deleted, not deleted data. Default not deleted.'
+      required: false
+      schema:
+        $ref: '#/components/schemas/Deleted'
+        default: ACTIVE
+    IdBasic:
+      name: id
+      description: id to delete or search
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/BasicId'
+    Metadata:
+      name: metadata
+      description: If metadata is needed (for pagination controls)
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+    Page:
+      name: page
+      description: number of page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+    Size:
+      name: size
+      description: size of page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Sort:
+      name: sort
+      description: sort by property.
+      in: query
+      required: false
+      schema:
+        type: string
+    IdDiscount:
+      name: id
+      description: id to delete or search
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdDiscount'
+    IdOrder:
+      name: id
+      description: id to delete or search
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdOrder'
+    IdProduct:
+      name: id
+      description: id to delete or search
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdProduct'
+  headers:
+    Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+        format: int64
+    Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+        format: int64
+    Reset:
+      description: The number of seconds left in the current period
+      schema:
+        type: integer
+        format: int64
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key
+    bearer_auth:
+      type: http
+      scheme: bearer
+    main_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://localhost:9090.com/auth'
+          scopes:
+            'read:product': read product.
+            'update:product': modify product.
+            'create:product': create product.
+            'delete:product': remove product.
+            'scan:product': scan product.
+            'bulk:product': bulk create product.
+            'read:discount': read discount.
+            'update:discount': modify discount.
+            'create:discount': create discount.
+            'delete:discount': remove discount.
+            'read:order': read discount.
+            'update:order': modify discount.
+            'create:order': create discount.
+            'delete:order': remove discount.
