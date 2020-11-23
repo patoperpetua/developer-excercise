@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const config = require('../config');
-const logger = require('../logger');
+import fs from 'fs';
+import path from 'path';
+import config from '../config';
+import logger from '../logger';
 
 class Controller {
   static sendResponse(response, payload) {
@@ -55,35 +55,8 @@ class Controller {
     return uploadedFileName;
   }
 
-  // static collectFiles(request) {
-  //   logger.info('Checking if files are expected in schema');
-  //   const requestFiles = {};
-  //   if (request.openapi.schema.requestBody !== undefined) {
-  //     const [contentType] = request.headers['content-type'].split(';');
-  //     if (contentType === 'multipart/form-data') {
-  //       const contentSchema = request.openapi.schema.requestBody.content[contentType].schema;
-  //       Object.entries(contentSchema.properties).forEach(([name, property]) => {
-  //         if (property.type === 'string' && ['binary', 'base64'].indexOf(property.format) > -1) {
-  //           const fileObject = request.files.find(file => file.fieldname === name);
-  //           const fileArray = fileObject.originalname.split('.');
-  //           const extension = fileArray.pop();
-  //           fileArray.push(`_${Date.now()}`);
-  //           const uploadedFileName = `${fileArray.join('')}.${extension}`;
-  //           fs.renameSync(path.join(config.FILE_UPLOAD_PATH, fileObject.filename),
-  //             path.join(config.FILE_UPLOAD_PATH, uploadedFileName));
-  //           requestFiles[name] = uploadedFileName;
-  //         }
-  //       });
-  //     } else if (request.openapi.schema.requestBody.content[contentType] !== undefined
-  //         && request.files !== undefined) {
-  //       [request.body] = request.files;
-  //     }
-  //   }
-  //   return requestFiles;
-  // }
-
   static collectRequestParams(request) {
-    const requestParams = {};
+    const requestParams:any = {};
     if (request.openapi.schema.requestBody !== undefined) {
       const { content } = request.openapi.schema.requestBody;
       if (content['application/json'] !== undefined) {
@@ -136,4 +109,4 @@ class Controller {
   }
 }
 
-module.exports = Controller;
+export default Controller;

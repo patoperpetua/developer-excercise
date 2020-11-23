@@ -1,4 +1,6 @@
-class Service {
+"use strict";
+
+export class Service {
   static rejectResponse(error, code = 500) {
     return { error, code };
   }
@@ -7,5 +9,3 @@ class Service {
     return { payload, code };
   }
 }
-
-module.exports = Service;

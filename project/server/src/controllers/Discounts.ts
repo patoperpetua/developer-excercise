@@ -6,28 +6,30 @@
  * parameters are extracted and sent to the service, and where response is handled.
  */
 
-const Controller = require('./Controller');
-const service = require('../services/DiscountsService');
-const addDiscount = async (request, response) => {
+"use strict";
+import { CustomRequest, CustomResponse } from "../utils/CustomsHandlers";
+import Controller from './Controller';
+import { DiscountsService as service } from '../services';
+
+const addDiscount = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.addDiscount);
 };
 
-const deleteDiscount = async (request, response) => {
+const deleteDiscount = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.deleteDiscount);
 };
 
-const editDiscount = async (request, response) => {
+const editDiscount = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.editDiscount);
 };
 
-const getDiscountById = async (request, response) => {
+const getDiscountById = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.getDiscountById);
 };
 
-const getDiscounts = async (request, response) => {
+const getDiscounts = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.getDiscounts);
 };
-
 
 module.exports = {
   addDiscount,

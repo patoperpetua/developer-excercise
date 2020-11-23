@@ -6,29 +6,32 @@
  * parameters are extracted and sent to the service, and where response is handled.
  */
 
-const Controller = require('./Controller');
-const service = require('../services/ProductsService');
-const addProduct = async (request, response) => {
+"use strict";
+import { CustomRequest, CustomResponse } from "../utils/CustomsHandlers";
+import Controller from './Controller';
+import { ProductsService as service } from '../services';
+
+const addProduct = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.addProduct);
 };
 
-const addProducts = async (request, response) => {
+const addProducts = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.addProducts);
 };
 
-const deleteProduct = async (request, response) => {
+const deleteProduct = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.deleteProduct);
 };
 
-const editProduct = async (request, response) => {
+const editProduct = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.editProduct);
 };
 
-const getProductById = async (request, response) => {
+const getProductById = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.getProductById);
 };
 
-const getProducts = async (request, response) => {
+const getProducts = async (request: CustomRequest, response: CustomResponse) => {
   await Controller.handleRequest(request, response, service.getProducts);
 };
 
