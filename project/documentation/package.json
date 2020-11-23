@@ -12,7 +12,7 @@
     "build-all": "npm run build",
     "test": "swagger-repo validate -b src",
     "test-web": "npm run build-all && npm run web-server",
-    "gh-pages": "rm -rf web_deploy && mkdir -p web_deploy && cp -r dist/* web_deploy && swagger-repo gh-pages -b src",
+    "gh-pages": "rm -rf web_deploy && mkdir -p web_deploy && cp -r dist/* web_deploy && swagger-repo gh-pages",
     "swagger-repo": "swagger-repo",
     "create-openapi-repo": "create-openapi-repo",
     "generate-from-scratch": "npm run test && npm run build-all && npm run typescript",
@@ -25,7 +25,7 @@
     "generate-lib-angular": "npm run generate-angular && npm run install-angular",
     "generate-angular": "openapi-generator-cli generate -i dist/openapi.json -o ../libraries/typescript-angular -g typescript-angular --config conf/api-typescript-angular-client.json",
     "install-angular": "cd ../libraries/typescript-angular && npm i && npm run build && npm pack",
-    "generate-server-nodejs": "openapi-generator-cli generate -i dist/openapi.json -o ../server -g spring --config conf/api-nodejs-server.json"
+    "generate-server-nodejs": "openapi-generator-cli generate -i dist/openapi.json -o ../server -g nodejs-express-server --config conf/api-nodejs-server.json"
   },
   "repository": {
     "type": "git",
