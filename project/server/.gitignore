@@ -4,3 +4,4 @@ logs
 *.log
 uploaded_files
 *.env
+data

@@ -1,0 +1,19 @@
+[
+  {
+    "name": "default",
+    "type": "sqlite",
+    "host": "localhost",
+    "database": "./data/kinesis-exercise.sqlite",
+    "synchronize": true,
+    "loggerLevel": "debug",
+    "debug": "true",
+    "options": {
+      "encrypt": true
+    },
+    "cli": {
+        "entitiesDir": "src/databases/entities",
+        "migrationsDir": "src/databases/migrations",
+        "subscribersDir": "src/databases/subscribers"
+    }
+  }
+]
