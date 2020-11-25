@@ -53,6 +53,7 @@ If you have submitted a PR and not received any feedback for a while, feel free 
 - [ ] Setup Github actions.
 - [X] Split swagger.yaml into multiple files.
 - [X] Use [ReDoc](https://github.com/Redocly/redoc) documentation framework.
+- [ ] Generate postman files from specification [link](https://github.com/postmanlabs/openapi-to-postman).
 
 ----------------------
 
