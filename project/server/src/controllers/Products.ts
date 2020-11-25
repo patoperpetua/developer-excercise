@@ -12,6 +12,7 @@ import Controller from './Controller';
 import { ProductsService as service } from '../services';
 import { Utilities } from "@utils/Utilities";
 import { Products } from "@databases/index";
+import { ParametersComplete } from "@models/index";
 
 const addProduct = async (request: CustomRequest, response: CustomResponse) => {
   let params: Products = Utilities.checkVariableNotNull(request.swagger.params.undefined.originalValue, response);
@@ -35,7 +36,8 @@ const getProductById = async (request: CustomRequest, response: CustomResponse) 
 };
 
 const getProducts = async (request: CustomRequest, response: CustomResponse) => {
-  await Controller.handleRequest(request, response, service.getProducts);
+  let params: ParametersComplete = Utilities.checkAllParametersGet(request.swagger.params, response);
+  await Controller.handleRequest(params, response, service.getProducts);
 };
 
 

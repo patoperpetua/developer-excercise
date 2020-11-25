@@ -1,5 +1,4 @@
 import { LoggerUtility } from '@utils/LoggerUtility';
-import { ParametersComplete, Utilities } from '@utils/Utilities';
 
 class Controller {
   static sendResponse(response, payload) {

@@ -1,6 +1,8 @@
 "use strict";
 import { Products } from '@databases/index';
 import { ProductsRepository } from '@databases/repositories/ProductsRepository';
+import { ParametersComplete } from '@models/index';
+import { Utilities } from '@utils/index';
 import { LoggerUtility } from '@utils/LoggerUtility';
 import { getCustomRepository } from 'typeorm';
 /* eslint-disable no-unused-vars */
@@ -138,21 +140,20 @@ export class ProductsService extends Service {
   * metadata Boolean If metadata is needed (for pagination controls) (optional)
   * returns ResponseGetProduct
   * */
-  public static getProducts = ({ page, size, sort, deleted, metadata }) => new Promise(
+  public static getProducts = (parameters: ParametersComplete) => new Promise(
     async (resolve, reject) => {
       try {
-        resolve(Service.successResponse({
-          page,
-          size,
-          sort,
-          deleted,
-          metadata,
-        }));
+        LoggerUtility.debug(`using parameters`, parameters);
+        const [items, total] = await ProductsService.repository.findAndCount({ skip: parameters.skip, take: parameters.limit });
+        if (!items || !items.length) {
+            LoggerUtility.warn(`empty result`);
+            resolve(Service.successResponse({}));
+            return;
+        }
+        LoggerUtility.info(`got ${items.length}`);
+        resolve(Service.successResponse(Utilities.getMetadataFormat(items, total, parameters)));
       } catch (e) {
-        reject(Service.rejectResponse(
-          e.message || 'Invalid input',
-          e.status || 405,
-        ));
+        reject(Service.rejectResponse(e.message || 'Invalid input', e.status || 405));
       }
     },
   );

@@ -6,6 +6,8 @@ export class Service {
   }
 
   static successResponse(payload, code = 200) {
+    if(!Object.keys(payload).length)
+      code = 204;
     return { payload, code };
   }
 }
