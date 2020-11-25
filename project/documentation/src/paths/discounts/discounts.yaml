@@ -5,8 +5,8 @@ get:
   description: Get all discounts.
   operationId: getDiscounts
   parameters:
-    - $ref: '#/components/parameters/Page'
-    - $ref: '#/components/parameters/Size'
+    - $ref: '#/components/parameters/Skip'
+    - $ref: '#/components/parameters/Limit'
     - $ref: '#/components/parameters/Sort'
     - $ref: '#/components/parameters/Deleted'
     - $ref: '#/components/parameters/Metadata'
