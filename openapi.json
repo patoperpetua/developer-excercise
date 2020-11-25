@@ -51,10 +51,10 @@
         "operationId": "getDiscounts",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Page"
+            "$ref": "#/components/parameters/Skip"
           },
           {
-            "$ref": "#/components/parameters/Size"
+            "$ref": "#/components/parameters/Limit"
           },
           {
             "$ref": "#/components/parameters/Sort"
@@ -354,10 +354,10 @@
         "operationId": "getOrders",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Page"
+            "$ref": "#/components/parameters/Skip"
           },
           {
-            "$ref": "#/components/parameters/Size"
+            "$ref": "#/components/parameters/Limit"
           },
           {
             "$ref": "#/components/parameters/Sort"
@@ -720,10 +720,10 @@
         "operationId": "getProducts",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Page"
+            "$ref": "#/components/parameters/Skip"
           },
           {
-            "$ref": "#/components/parameters/Size"
+            "$ref": "#/components/parameters/Limit"
           },
           {
             "$ref": "#/components/parameters/Sort"
@@ -1481,6 +1481,17 @@
           "$ref": "#/components/schemas/BasicId"
         }
       },
+      "Limit": {
+        "name": "limit",
+        "description": "max records to return",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 10
+        }
+      },
       "Metadata": {
         "name": "metadata",
         "description": "If metadata is needed (for pagination controls)",
@@ -1511,6 +1522,17 @@
           "type": "integer",
           "format": "int32",
           "default": 10
+        }
+      },
+      "Skip": {
+        "name": "skip",
+        "description": "number of item to skip",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
         }
       },
       "Sort": {
