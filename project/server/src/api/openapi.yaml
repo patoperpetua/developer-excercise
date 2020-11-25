@@ -1393,68 +1393,52 @@ components:
           products:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             idDiscounts:
-            - null
-            - null
+            - 9
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 2
           - createdAt: 2000-01-23T04:56:07.000+00:00
             idDiscounts:
-            - null
-            - null
+            - 9
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
             id: 1
           idProducts:
-          - null
-          - null
+          - 1
+          - 2
         - itemsXQuantity: 3
           createdAt: 2000-01-23T04:56:07.000+00:00
           deleted: false
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           discount: 41.45608
-          id: 9
+          id: 10
           itemsYQuantity: 2
           maxDiscountToApply: 7
           products:
           - createdAt: 2000-01-23T04:56:07.000+00:00
             idDiscounts:
-            - null
-            - null
+            - 10
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 3
           - createdAt: 2000-01-23T04:56:07.000+00:00
             idDiscounts:
-            - null
-            - null
+            - 10
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 4
           idProducts:
-          - null
-          - null
+          - 3
+          - 4
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -1481,8 +1465,7 @@ components:
         items:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           idDiscounts:
-          - null
-          - null
+          - 9
           deleted: false
           discounts:
           - itemsXQuantity: 3
@@ -1494,215 +1477,63 @@ components:
             id: 9
             itemsYQuantity: 2
             maxDiscountToApply: 7
-            products:
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
             idProducts:
-            - null
-            - null
+            - 1
+            - 2
           - itemsXQuantity: 3
             createdAt: 2000-01-23T04:56:07.000+00:00
             deleted: false
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
             discount: 41.45608
-            id: 9
+            id: 10
             itemsYQuantity: 2
             maxDiscountToApply: 7
-            products:
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
             idProducts:
-            - null
-            - null
+            - 3
+            - 4
           totalPrice: 6.0274563
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: 0
           products:
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
             id: 1
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 2
           idProducts:
-          - null
-          - null
+          - 1
+          - 2
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          idDiscounts:
-          - null
-          - null
           deleted: false
-          discounts:
-          - itemsXQuantity: 3
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            deleted: false
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            discount: 41.45608
-            id: 9
-            itemsYQuantity: 2
-            maxDiscountToApply: 7
-            products:
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            idProducts:
-            - null
-            - null
-          - itemsXQuantity: 3
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            deleted: false
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            discount: 41.45608
-            id: 9
-            itemsYQuantity: 2
-            maxDiscountToApply: 7
-            products:
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            - createdAt: 2000-01-23T04:56:07.000+00:00
-              idDiscounts:
-              - null
-              - null
-              deleted: false
-              discounts:
-              - null
-              - null
-              price: 1.0246457
-              modifiedAt: 2000-01-23T04:56:07.000+00:00
-              name: name
-              id: 1
-            idProducts:
-            - null
-            - null
           totalPrice: 6.0274563
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: 0
           products:
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 3
           - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
             deleted: false
-            discounts:
-            - null
-            - null
             price: 1.0246457
             modifiedAt: 2000-01-23T04:56:07.000+00:00
             name: name
-            id: 1
+            id: 4
           idProducts:
-          - null
-          - null
+          - 3
+          - 4
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -1729,28 +1560,20 @@ components:
         items:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           idDiscounts:
-          - null
-          - null
+          - 2
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: 1
         - createdAt: 2000-01-23T04:56:07.000+00:00
           idDiscounts:
-          - null
-          - null
+          - 4
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
-          id: 1
+          id: 2
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
@@ -1774,31 +1597,23 @@ components:
         products:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           idDiscounts:
-          - null
-          - null
+          - 9
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: 1
         - createdAt: 2000-01-23T04:56:07.000+00:00
           idDiscounts:
-          - null
-          - null
+          - 9
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
-          id: 1
+          id: 2
         idProducts:
-        - null
-        - null
+        - 1
+        - 2
       properties:
         id:
           description: Discount's Id.
@@ -1879,34 +1694,9 @@ components:
           id: 9
           itemsYQuantity: 2
           maxDiscountToApply: 7
-          products:
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
-            deleted: false
-            discounts:
-            - null
-            - null
-            price: 1.0246457
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            id: 1
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
-            deleted: false
-            discounts:
-            - null
-            - null
-            price: 1.0246457
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            id: 1
           idProducts:
-          - null
-          - null
+          - 2
+          - 3
         - itemsXQuantity: 3
           createdAt: 2000-01-23T04:56:07.000+00:00
           deleted: false
@@ -1916,34 +1706,9 @@ components:
           id: 9
           itemsYQuantity: 2
           maxDiscountToApply: 7
-          products:
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
-            deleted: false
-            discounts:
-            - null
-            - null
-            price: 1.0246457
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            id: 1
-          - createdAt: 2000-01-23T04:56:07.000+00:00
-            idDiscounts:
-            - null
-            - null
-            deleted: false
-            discounts:
-            - null
-            - null
-            price: 1.0246457
-            modifiedAt: 2000-01-23T04:56:07.000+00:00
-            name: name
-            id: 1
           idProducts:
-          - null
-          - null
+          - 4
+          - 5
         totalPrice: 6.0274563
         modifiedAt: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -1954,9 +1719,6 @@ components:
           - null
           - null
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -1966,9 +1728,6 @@ components:
           - null
           - null
           deleted: false
-          discounts:
-          - null
-          - null
           price: 1.0246457
           modifiedAt: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -2024,15 +1783,12 @@ components:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
         idDiscounts:
-        - null
-        - null
+        - 2
+        - 3
         deleted: false
-        discounts:
-        - null
-        - null
-        price: 1.0246457
+        price: 1.50
         modifiedAt: 2000-01-23T04:56:07.000+00:00
-        name: name
+        name: Banana
         id: 1
       properties:
         id:
@@ -2049,10 +1805,10 @@ components:
           items:
             $ref: '#/components/schemas/IdDiscount'
           type: array
-        discounts:
-          items:
-            $ref: '#/components/schemas/Discounts'
-          type: array
+        # discounts:
+        #   items:
+        #     $ref: '#/components/schemas/Discounts'
+        #   type: array
         deleted:
           default: false
           type: boolean
