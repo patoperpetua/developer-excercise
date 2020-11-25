@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
 import "reflect-metadata";
-import { createConnection, createConnections } from "typeorm";
+import { ConnectionOptions, createConnection, createConnections } from "typeorm";
 import { LoggerUtility } from "./LoggerUtility";
 
 export class DatabaseUtil {
@@ -20,20 +20,33 @@ export class DatabaseUtil {
             const confDir = path.join(__dirname, "../../conf/ormconfig.json");
             if (fs.existsSync(confDir)) {
                 const specDB = fs.readFileSync(confDir, "utf8");
-                const dbConf = JSON.parse(specDB);
-                dbConf[0].entities = [];
+                const dbConfs = JSON.parse(specDB);
+                let dbConf;
+                switch(process.env.NODE_ENV){
+                    case "production":
+                        dbConf  = dbConfs.find((conn:ConnectionOptions ) => conn.name === "file-db");
+                        break;
+                    case "testing":
+                        dbConf  = dbConfs.find((conn:ConnectionOptions ) => conn.name === "memory-db");
+                        break;
+                    default:
+                        dbConf  = dbConfs.find((conn:ConnectionOptions ) => conn.name === "file-db");
+                }
+                LoggerUtility.info(`Working with ${dbConf.name} database configuration`);
+                dbConf.entities = [];
                 if (process.env.NODE_ENV === "production") {
                     LoggerUtility.info("Working with JS files");
-                    dbConf[0].entities.push("dist/databases/entities/**/*.js");
+                    dbConf.entities.push("dist/databases/entities/**/*.js");
                 } else {
                     LoggerUtility.info("Working with TS files");
-                    dbConf[0].entities.push("src/databases/entities/**/*.ts");
+                    dbConf.entities.push("src/databases/entities/**/*.ts");
                 }
                 const password = process.env.DB_PASSWORD;
                 const user = process.env.DB_USER;
-                dbConf[0].username = user;
-                dbConf[0].password = password;
-                this.connectionFunction = createConnections(dbConf);
+                dbConf.username = user;
+                dbConf.password = password;
+                dbConf.name = "default";
+                this.connectionFunction = createConnections([dbConf])
             } else {
                 this.connectionFunction = new Promise((resolve, reject) => {
                     resolve(true);

@@ -11,11 +11,27 @@ export class Products extends BasicEntity {
 
     @Column("float", {name: "price", nullable: false
     })
-    public price?: number;
+    public price: number;
 
     @ManyToMany(() => Discounts, discount => discount.products)
-    public discounts: Array<Discounts>;
+    public discounts?: Array<Discounts>;
 
     @ManyToMany(() => Orders, order => order.products)
-    public orders: Array<Orders>;
+    public orders?: Array<Orders>;
+
+    public sanitize?(): Products {
+        this.orders = null;
+        this.discounts = null;
+        this.createdAt = null;
+        this.modifiedAt = null;
+        return this;
+    }
+
+    public constructor(init?: Partial<Products>) {
+        super(init);
+    }
+
+    protected assign(init?: Partial<Products>) {
+        Object.assign(this, init);
+    }
 }

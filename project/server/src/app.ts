@@ -11,7 +11,7 @@ import { DatabaseUtil } from "@utils/DatabaseUtil";
 dotenv.config();
 const app = express();
 
-app.use(bodyParser.json({ limit: '14MB' }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.use(helmet.xssFilter());
@@ -19,7 +19,9 @@ app.use(helmet.frameguard());
 
 async function main () {
     await new DatabaseUtil().connect();
-    new OpenAPIUtil().configure(app);
+    await new OpenAPIUtil().configure(app);
+    LoggerUtility.info("API running");
+    app.emit("appStarted");
 }
 
 main().catch((error) => {

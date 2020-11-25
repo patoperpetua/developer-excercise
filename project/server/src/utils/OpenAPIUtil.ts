@@ -39,14 +39,17 @@ export class OpenAPIUtil {
         }
     }
     
-    public configure(app:core.Express): void{
-        app.get('/hello', (_req, res) => res.send(`Hello World. path: ${this.specDir}`));
-        app.use("/docs", swaggerUi.serve, swaggerUi.setup(this.swaggerDoc));
-        app.use("/api-docs", (_req, res) => res.sendFile((path.join(__dirname, 'api', 'openapi.yaml'))));
+    public configure(app:core.Express): Promise<void> {
+        return new Promise<void>(async (resolve) => {
+            app.get('/hello', (_req, res) => res.send(`Hello World. path: ${this.specDir}`));
+            app.use("/docs", swaggerUi.serve, swaggerUi.setup(this.swaggerDoc));
+            app.use("/api-docs", (_req, res) => res.sendFile((path.join(__dirname, 'api', 'openapi.yaml'))));
 
-        swaggerTools.configure(this.options);
-        swaggerTools.initialize(this.swaggerDoc, app, () => {
-            LoggerUtility.debug("Swagger OAS middleware initialized.");
+            swaggerTools.configure(this.options);
+            swaggerTools.initialize(this.swaggerDoc, app, () => {
+                LoggerUtility.debug("Swagger OAS middleware initialized.");
+                resolve();
+            });
         });
     }
 }

@@ -1,11 +1,15 @@
 [
   {
-    "name": "default",
+    "name": "file-db",
     "type": "sqlite",
     "host": "localhost",
     "database": "./data/kinesis-exercise.sqlite",
     "synchronize": true,
-    "loggerLevel": "debug",
+    "loggerLevel": "warn",
+    "logging": {
+      "logQueries": true,
+      "logFailedQueryError": true
+    },
     "debug": "true",
     "options": {
       "encrypt": true
@@ -15,5 +19,17 @@
         "migrationsDir": "src/databases/migrations",
         "subscribersDir": "src/databases/subscribers"
     }
+  },
+  {
+      "name": "memory-db",
+      "type": "sqlite",
+      "database": ":memory:",
+      "synchronize": true,
+      "loggerLevel": "debug",
+      "logging": {
+        "logQueries": true,
+        "logFailedQueryError": true
+      }
   }
+  
 ]

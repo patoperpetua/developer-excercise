@@ -1,6 +1,6 @@
-import { AfterUpdate, Column, PrimaryGeneratedColumn } from "typeorm";
+import { AfterUpdate, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-export class BasicEntity {
+export abstract class BasicEntity {
 
     @PrimaryGeneratedColumn({name: "id"})
     public id!: number;
@@ -12,22 +12,32 @@ export class BasicEntity {
     })
     public deleted?: boolean;
 
-    @Column({
+    @CreateDateColumn({
         default: () => "CURRENT_TIMESTAMP",
         name: "createdAt",
-        nullable: false
+        nullable: false,
+        insert: false,
+        update: false
     })
     public createdAt?: Date;
 
-    @Column({
+    @UpdateDateColumn({
         default: () => "CURRENT_TIMESTAMP",
         name: "modifiedAt",
-        nullable: false
+        nullable: false,
+        insert: false,
+        update: false
     })
     public modifiedAt?: Date;
 
-    @AfterUpdate()
-    async updateModifiedDate(): Promise<void> {
-
+    public constructor(init?: Partial<BasicEntity>) {
+        this.assign(init);
+        Object.assign(this, init);
+        if(this.modifiedAt)
+            this.modifiedAt = new Date(this.modifiedAt);
+        if(this.createdAt)
+            this.createdAt = new Date(this.createdAt);
     }
+
+    protected abstract assign(init?: Partial<BasicEntity>);
 }

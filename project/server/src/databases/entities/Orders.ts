@@ -14,4 +14,12 @@ export class Orders extends BasicEntity {
     @ManyToMany(() => Discounts, (discounts: Discounts) => discounts.orders)
     @JoinTable()
     public discounts?: Array<Discounts>;
+
+    public constructor(init?: Partial<Orders>) {
+        super(init);
+    }
+
+    protected assign(init?: Partial<Orders>) {
+        Object.assign(this, init);
+    }
 }
