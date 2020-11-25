@@ -1,8 +1,15 @@
 "use strict";
+import { Products } from '@databases/index';
+import { ProductsRepository } from '@databases/repositories/ProductsRepository';
+import { LoggerUtility } from '@utils/LoggerUtility';
+import { getCustomRepository } from 'typeorm';
 /* eslint-disable no-unused-vars */
 import { Service } from './Service';
 
 export class ProductsService extends Service {
+
+  public static repository = getCustomRepository(ProductsRepository);
+
   /**
   * Add one product.
   * Add one product.
@@ -10,20 +17,28 @@ export class ProductsService extends Service {
   * products Products 
   * returns Products
   * */
-  public static addProduct = ({ products }) => new Promise(
+  public static addProduct = (product: Products) => new Promise(
     async (resolve, reject) => {
+      const received = new Products(product);
+      LoggerUtility.debug("received", received);
+      LoggerUtility.info("received", received.name);
       try {
-        resolve(Service.successResponse({
-          products,
-        }));
+        if(received.price <= 0)
+          return reject(Service.rejectResponse({message: `Price ${received.price} can't be 0 or less`, data: received}, 400));
+        const previous = await ProductsService.repository.findByName(received.name);
+        if(previous)
+          return reject(Service.rejectResponse({message: `Name ${received.name} already exists`, data: received}, 400));
+        received.id = null;
+        const saved = await ProductsService.repository.save(received.sanitize());
+        LoggerUtility.debug("saved", saved);
+        LoggerUtility.info("saved", saved.id);
+        resolve(Service.successResponse(await ProductsService.repository.findOne(saved.id)));
       } catch (e) {
-        reject(Service.rejectResponse(
-          e.message || 'Invalid input',
-          e.status || 405,
-        ));
+        reject(Service.rejectResponse(e.message || 'Invalid input', e.status || 405));
       }
     },
   );
+
   /**
   * Add a list of products.
   * Add a list of products.

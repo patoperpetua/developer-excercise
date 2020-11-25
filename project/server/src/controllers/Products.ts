@@ -10,9 +10,12 @@
 import { CustomRequest, CustomResponse } from "../utils/CustomsHandlers";
 import Controller from './Controller';
 import { ProductsService as service } from '../services';
+import { Utilities } from "@utils/Utilities";
+import { Products } from "@databases/index";
 
 const addProduct = async (request: CustomRequest, response: CustomResponse) => {
-  await Controller.handleRequest(request, response, service.addProduct);
+  let params: Products = Utilities.checkVariableNotNull(request.swagger.params.undefined.originalValue, response);
+  await Controller.handleRequest(params, response, service.addProduct);
 };
 
 const addProducts = async (request: CustomRequest, response: CustomResponse) => {
