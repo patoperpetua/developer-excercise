@@ -710,8 +710,8 @@ public class ProductsApi {
     }
     /**
      * Build call for getProducts
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -729,7 +729,7 @@ public class ProductsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getProductsCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getProductsCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -737,12 +737,12 @@ public class ProductsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        if (skip != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("skip", skip));
         }
 
-        if (size != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("size", size));
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
         if (sort != null) {
@@ -779,10 +779,10 @@ public class ProductsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getProductsValidateBeforeCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getProductsValidateBeforeCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = getProductsCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getProductsCall(skip, limit, sort, deleted, metadata, _callback);
         return localVarCall;
 
     }
@@ -790,8 +790,8 @@ public class ProductsApi {
     /**
      * Get all products.
      * Get all products.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -808,16 +808,16 @@ public class ProductsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ResponseGetProduct getProducts(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        ApiResponse<ResponseGetProduct> localVarResp = getProductsWithHttpInfo(page, size, sort, deleted, metadata);
+    public ResponseGetProduct getProducts(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        ApiResponse<ResponseGetProduct> localVarResp = getProductsWithHttpInfo(skip, limit, sort, deleted, metadata);
         return localVarResp.getData();
     }
 
     /**
      * Get all products.
      * Get all products.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -834,8 +834,8 @@ public class ProductsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ResponseGetProduct> getProductsWithHttpInfo(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        okhttp3.Call localVarCall = getProductsValidateBeforeCall(page, size, sort, deleted, metadata, null);
+    public ApiResponse<ResponseGetProduct> getProductsWithHttpInfo(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        okhttp3.Call localVarCall = getProductsValidateBeforeCall(skip, limit, sort, deleted, metadata, null);
         Type localVarReturnType = new TypeToken<ResponseGetProduct>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -843,8 +843,8 @@ public class ProductsApi {
     /**
      * Get all products. (asynchronously)
      * Get all products.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -862,9 +862,9 @@ public class ProductsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getProductsAsync(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetProduct> _callback) throws ApiException {
+    public okhttp3.Call getProductsAsync(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetProduct> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getProductsValidateBeforeCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getProductsValidateBeforeCall(skip, limit, sort, deleted, metadata, _callback);
         Type localVarReturnType = new TypeToken<ResponseGetProduct>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

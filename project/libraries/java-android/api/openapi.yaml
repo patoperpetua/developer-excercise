@@ -34,20 +34,20 @@ paths:
       description: Get all discounts.
       operationId: getDiscounts
       parameters:
-      - description: number of page
+      - description: number of item to skip
         explode: true
         in: query
-        name: page
+        name: skip
         required: false
         schema:
           default: 0
           format: int32
           type: integer
         style: form
-      - description: size of page
+      - description: max records to return
         explode: true
         in: query
-        name: size
+        name: limit
         required: false
         schema:
           default: 10
@@ -364,20 +364,20 @@ paths:
       description: Get all orders.
       operationId: getOrders
       parameters:
-      - description: number of page
+      - description: number of item to skip
         explode: true
         in: query
-        name: page
+        name: skip
         required: false
         schema:
           default: 0
           format: int32
           type: integer
         style: form
-      - description: size of page
+      - description: max records to return
         explode: true
         in: query
-        name: size
+        name: limit
         required: false
         schema:
           default: 10
@@ -755,20 +755,20 @@ paths:
       description: Get all products.
       operationId: getProducts
       parameters:
-      - description: number of page
+      - description: number of item to skip
         explode: true
         in: query
-        name: page
+        name: skip
         required: false
         schema:
           default: 0
           format: int32
           type: integer
         style: form
-      - description: size of page
+      - description: max records to return
         explode: true
         in: query
-        name: size
+        name: limit
         required: false
         schema:
           default: 10
@@ -1176,6 +1176,17 @@ components:
       schema:
         $ref: '#/components/schemas/BasicId'
       style: simple
+    Limit:
+      description: max records to return
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 10
+        format: int32
+        type: integer
+      style: form
     Metadata:
       description: If metadata is needed (for pagination controls)
       explode: true
@@ -1205,6 +1216,17 @@ components:
       required: false
       schema:
         default: 10
+        format: int32
+        type: integer
+      style: form
+    Skip:
+      description: number of item to skip
+      explode: true
+      in: query
+      name: skip
+      required: false
+      schema:
+        default: 0
         format: int32
         type: integer
       style: form

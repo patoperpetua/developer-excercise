@@ -482,27 +482,27 @@ export class ProductsService implements ProductsServiceInterface {
     /**
      * Get all products.
      * Get all products.
-     * @param page number of page
-     * @param size size of page
+     * @param skip number of item to skip
+     * @param limit max records to return
      * @param sort sort by property.
      * @param deleted Get all, deleted, not deleted data. Default not deleted.
      * @param metadata If metadata is needed (for pagination controls)
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProducts(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<ResponseGetProduct>;
-    public getProducts(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<ResponseGetProduct>>;
-    public getProducts(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<ResponseGetProduct>>;
-    public getProducts(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public getProducts(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<ResponseGetProduct>;
+    public getProducts(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<ResponseGetProduct>>;
+    public getProducts(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<ResponseGetProduct>>;
+    public getProducts(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
-        if (page !== undefined && page !== null) {
+        if (skip !== undefined && skip !== null) {
           queryParameters = this.addToHttpParams(queryParameters,
-            <any>page, 'page');
+            <any>skip, 'skip');
         }
-        if (size !== undefined && size !== null) {
+        if (limit !== undefined && limit !== null) {
           queryParameters = this.addToHttpParams(queryParameters,
-            <any>size, 'size');
+            <any>limit, 'limit');
         }
         if (sort !== undefined && sort !== null) {
           queryParameters = this.addToHttpParams(queryParameters,

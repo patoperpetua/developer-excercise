@@ -61,12 +61,12 @@ export interface DiscountsServiceInterface {
     /**
      * Get all discounts.
      * Get all discounts.
-     * @param page number of page
-     * @param size size of page
+     * @param skip number of item to skip
+     * @param limit max records to return
      * @param sort sort by property.
      * @param deleted Get all, deleted, not deleted data. Default not deleted.
      * @param metadata If metadata is needed (for pagination controls)
      */
-    getDiscounts(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, extraHttpRequestParams?: any): Observable<ResponseGetDiscount>;
+    getDiscounts(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, extraHttpRequestParams?: any): Observable<ResponseGetDiscount>;
 
 }

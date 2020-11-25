@@ -583,8 +583,8 @@ public class DiscountsApi {
     }
     /**
      * Build call for getDiscounts
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -602,7 +602,7 @@ public class DiscountsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getDiscountsCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getDiscountsCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -610,12 +610,12 @@ public class DiscountsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        if (skip != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("skip", skip));
         }
 
-        if (size != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("size", size));
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
         if (sort != null) {
@@ -652,10 +652,10 @@ public class DiscountsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getDiscountsValidateBeforeCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getDiscountsValidateBeforeCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = getDiscountsCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getDiscountsCall(skip, limit, sort, deleted, metadata, _callback);
         return localVarCall;
 
     }
@@ -663,8 +663,8 @@ public class DiscountsApi {
     /**
      * Get all discounts.
      * Get all discounts.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -681,16 +681,16 @@ public class DiscountsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ResponseGetDiscount getDiscounts(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        ApiResponse<ResponseGetDiscount> localVarResp = getDiscountsWithHttpInfo(page, size, sort, deleted, metadata);
+    public ResponseGetDiscount getDiscounts(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        ApiResponse<ResponseGetDiscount> localVarResp = getDiscountsWithHttpInfo(skip, limit, sort, deleted, metadata);
         return localVarResp.getData();
     }
 
     /**
      * Get all discounts.
      * Get all discounts.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -707,8 +707,8 @@ public class DiscountsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ResponseGetDiscount> getDiscountsWithHttpInfo(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        okhttp3.Call localVarCall = getDiscountsValidateBeforeCall(page, size, sort, deleted, metadata, null);
+    public ApiResponse<ResponseGetDiscount> getDiscountsWithHttpInfo(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        okhttp3.Call localVarCall = getDiscountsValidateBeforeCall(skip, limit, sort, deleted, metadata, null);
         Type localVarReturnType = new TypeToken<ResponseGetDiscount>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -716,8 +716,8 @@ public class DiscountsApi {
     /**
      * Get all discounts. (asynchronously)
      * Get all discounts.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -735,9 +735,9 @@ public class DiscountsApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getDiscountsAsync(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetDiscount> _callback) throws ApiException {
+    public okhttp3.Call getDiscountsAsync(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetDiscount> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getDiscountsValidateBeforeCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getDiscountsValidateBeforeCall(skip, limit, sort, deleted, metadata, _callback);
         Type localVarReturnType = new TypeToken<ResponseGetDiscount>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

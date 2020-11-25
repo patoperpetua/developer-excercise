@@ -33,7 +33,7 @@ import java.io.Serializable;
  * Get discount&#39;s response.
  */
 @ApiModel(description = "Get discount's response.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-19T22:57:20.866150+10:00[Australia/Brisbane]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-25T15:13:08.351443+10:00[Australia/Brisbane]")
 public class ResponseGetDiscount implements Serializable {
   private static final long serialVersionUID = 1L;
 

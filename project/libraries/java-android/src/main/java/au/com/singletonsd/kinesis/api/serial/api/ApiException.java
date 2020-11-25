@@ -16,7 +16,7 @@ package au.com.singletonsd.kinesis.api.serial.api;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-19T22:57:20.866150+10:00[Australia/Brisbane]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-25T15:13:08.351443+10:00[Australia/Brisbane]")
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;

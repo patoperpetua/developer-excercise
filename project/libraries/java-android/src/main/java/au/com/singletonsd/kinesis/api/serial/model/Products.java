@@ -33,7 +33,7 @@ import java.io.Serializable;
  * Product&#39;s information.
  */
 @ApiModel(description = "Product's information.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-19T22:57:20.866150+10:00[Australia/Brisbane]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-11-25T15:13:08.351443+10:00[Australia/Brisbane]")
 public class Products implements Serializable {
   private static final long serialVersionUID = 1L;
 

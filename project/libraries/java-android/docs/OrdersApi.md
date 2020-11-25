@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 <a name="getOrders"></a>
 # **getOrders**
-> ResponseGetOrder getOrders(page, size, sort, deleted, metadata)
+> ResponseGetOrder getOrders(skip, limit, sort, deleted, metadata)
 
 Get all orders.
 
@@ -461,13 +461,13 @@ public class Example {
     main_auth.setAccessToken("YOUR ACCESS TOKEN");
 
     OrdersApi apiInstance = new OrdersApi(defaultClient);
-    Integer page = 0; // Integer | number of page
-    Integer size = 10; // Integer | size of page
+    Integer skip = 0; // Integer | number of item to skip
+    Integer limit = 10; // Integer | max records to return
     String sort = "sort_example"; // String | sort by property.
     Deleted deleted = new Deleted(); // Deleted | Get all, deleted, not deleted data. Default not deleted.
     Boolean metadata = false; // Boolean | If metadata is needed (for pagination controls)
     try {
-      ResponseGetOrder result = apiInstance.getOrders(page, size, sort, deleted, metadata);
+      ResponseGetOrder result = apiInstance.getOrders(skip, limit, sort, deleted, metadata);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OrdersApi#getOrders");
@@ -484,8 +484,8 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **Integer**| number of page | [optional] [default to 0]
- **size** | **Integer**| size of page | [optional] [default to 10]
+ **skip** | **Integer**| number of item to skip | [optional] [default to 0]
+ **limit** | **Integer**| max records to return | [optional] [default to 10]
  **sort** | **String**| sort by property. | [optional]
  **deleted** | [**Deleted**](.md)| Get all, deleted, not deleted data. Default not deleted. | [optional] [default to ACTIVE] [enum: ACTIVE, DELETED, ALL]
  **metadata** | **Boolean**| If metadata is needed (for pagination controls) | [optional] [default to false]

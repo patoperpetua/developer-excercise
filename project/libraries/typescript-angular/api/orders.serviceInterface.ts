@@ -70,12 +70,12 @@ export interface OrdersServiceInterface {
     /**
      * Get all orders.
      * Get all orders.
-     * @param page number of page
-     * @param size size of page
+     * @param skip number of item to skip
+     * @param limit max records to return
      * @param sort sort by property.
      * @param deleted Get all, deleted, not deleted data. Default not deleted.
      * @param metadata If metadata is needed (for pagination controls)
      */
-    getOrders(page?: number, size?: number, sort?: string, deleted?: Deleted, metadata?: boolean, extraHttpRequestParams?: any): Observable<ResponseGetOrder>;
+    getOrders(skip?: number, limit?: number, sort?: string, deleted?: Deleted, metadata?: boolean, extraHttpRequestParams?: any): Observable<ResponseGetOrder>;
 
 }

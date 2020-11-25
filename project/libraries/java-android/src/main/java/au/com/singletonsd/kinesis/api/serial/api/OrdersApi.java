@@ -720,8 +720,8 @@ public class OrdersApi {
     }
     /**
      * Build call for getOrders
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -739,7 +739,7 @@ public class OrdersApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getOrdersCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getOrdersCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -747,12 +747,12 @@ public class OrdersApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        if (skip != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("skip", skip));
         }
 
-        if (size != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("size", size));
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
         if (sort != null) {
@@ -789,10 +789,10 @@ public class OrdersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getOrdersValidateBeforeCall(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOrdersValidateBeforeCall(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback _callback) throws ApiException {
         
 
-        okhttp3.Call localVarCall = getOrdersCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getOrdersCall(skip, limit, sort, deleted, metadata, _callback);
         return localVarCall;
 
     }
@@ -800,8 +800,8 @@ public class OrdersApi {
     /**
      * Get all orders.
      * Get all orders.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -818,16 +818,16 @@ public class OrdersApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ResponseGetOrder getOrders(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        ApiResponse<ResponseGetOrder> localVarResp = getOrdersWithHttpInfo(page, size, sort, deleted, metadata);
+    public ResponseGetOrder getOrders(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        ApiResponse<ResponseGetOrder> localVarResp = getOrdersWithHttpInfo(skip, limit, sort, deleted, metadata);
         return localVarResp.getData();
     }
 
     /**
      * Get all orders.
      * Get all orders.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -844,8 +844,8 @@ public class OrdersApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ResponseGetOrder> getOrdersWithHttpInfo(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata) throws ApiException {
-        okhttp3.Call localVarCall = getOrdersValidateBeforeCall(page, size, sort, deleted, metadata, null);
+    public ApiResponse<ResponseGetOrder> getOrdersWithHttpInfo(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata) throws ApiException {
+        okhttp3.Call localVarCall = getOrdersValidateBeforeCall(skip, limit, sort, deleted, metadata, null);
         Type localVarReturnType = new TypeToken<ResponseGetOrder>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -853,8 +853,8 @@ public class OrdersApi {
     /**
      * Get all orders. (asynchronously)
      * Get all orders.
-     * @param page number of page (optional, default to 0)
-     * @param size size of page (optional, default to 10)
+     * @param skip number of item to skip (optional, default to 0)
+     * @param limit max records to return (optional, default to 10)
      * @param sort sort by property. (optional)
      * @param deleted Get all, deleted, not deleted data. Default not deleted. (optional, default to ACTIVE)
      * @param metadata If metadata is needed (for pagination controls) (optional, default to false)
@@ -872,9 +872,9 @@ public class OrdersApi {
         <tr><td> 405 </td><td> Illegal input for operation. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getOrdersAsync(Integer page, Integer size, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetOrder> _callback) throws ApiException {
+    public okhttp3.Call getOrdersAsync(Integer skip, Integer limit, String sort, Deleted deleted, Boolean metadata, final ApiCallback<ResponseGetOrder> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getOrdersValidateBeforeCall(page, size, sort, deleted, metadata, _callback);
+        okhttp3.Call localVarCall = getOrdersValidateBeforeCall(skip, limit, sort, deleted, metadata, _callback);
         Type localVarReturnType = new TypeToken<ResponseGetOrder>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
